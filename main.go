@@ -1,11 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
-	"net/http"
 	"os"
+
+	"github.com/jfrazelle/udict/api"
 )
 
 const (
@@ -19,22 +19,6 @@ const (
  Urban Dictionary Command Line Tool
  Version: ` + VERSION
 )
-
-type APIResponse struct {
-	Results []Result `json:"list"`
-	Tags    []string `json:"tags"`
-	Type    string   `json:"result_type"`
-}
-
-type Result struct {
-	Id         int32  `json:"defid"`
-	Author     string `json:"author"`
-	Definition string `json:"definition"`
-	Link       string `json:"permalink"`
-	ThumbsDown int32  `json:"thumbs_down"`
-	ThumbsUp   int32  `json:"thumbs_up"`
-	Word       string `json:"word"`
-}
 
 func main() {
 	var version bool
@@ -57,44 +41,9 @@ func main() {
 	}
 
 	word := args[1]
-	endpoint := fmt.Sprintf("http://api.urbandictionary.com/v0/define?page=%d&term=%s", 1, word)
-	resp, err := http.Get(endpoint)
 
-	if err != nil {
-		fmt.Printf("Request to %q failed: %v", endpoint, err)
-		return
-	}
-	defer resp.Body.Close()
+	response, err := udict.DefineWord(word)
 
-	/*
-		Reponse comes back like:
-		{
-		  "tags": [
-		    "icbw",
-		    "+1",
-		    "fine"
-		  ],
-		  "result_type": "exact",
-		  "list": [
-		    {
-		      "defid": 2535452,
-		      "word": "LGTM",
-		      "author": "akshay_s",
-		      "permalink": "http://lgtm.urbanup.com/2535452",
-		      "definition": "An acronym for \"Looks Good To Me\", often used as a quick response after reviewing someones essay, code, or design document.,example:[LGTM], dude. You can go ahead and push this [craxy] code to the prod server. Well make [M$] wish they were flippin burgers!  [Woot]!\r\n",
-		      "thumbs_up": 256,
-		      "thumbs_down": 39,
-		      "current_vote": ""
-		    },
-		    ...
-		  ],
-		  "sounds": []
-		}
-	*/
-
-	var response APIResponse
-	dec := json.NewDecoder(resp.Body)
-	err = dec.Decode(&response)
 	if err != nil {
 		fmt.Printf("Decoding api response as JSON failed: %v", err)
 		return
