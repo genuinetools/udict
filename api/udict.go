@@ -1,4 +1,4 @@
-package udict
+package api
 
 import (
 	"encoding/json"

@@ -42,7 +42,7 @@ func main() {
 
 	word := args[1]
 
-	response, err := udict.DefineWord(word)
+	response, err := api.DefineWord(word)
 
 	if err != nil {
 		fmt.Printf("Decoding api response as JSON failed: %v", err)
