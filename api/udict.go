@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 type APIResponse struct {
@@ -24,7 +25,7 @@ type Result struct {
 
 func DefineWord(word string) (response *APIResponse, err error) {
 
-	endpoint := fmt.Sprintf("http://api.urbandictionary.com/v0/define?page=%d&term=%s", 1, word)
+	endpoint := fmt.Sprintf("http://api.urbandictionary.com/v0/define?page=%d&term=%s", 1, url.QueryEscape(word))
 	resp, err := http.Get(endpoint)
 
 	if err != nil {
