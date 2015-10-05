@@ -9,8 +9,10 @@ import (
 )
 
 const (
-	VERSION = "v0.1.0"
-	BANNER  = `           _ _      _
+	// VERSION is the binary version
+	VERSION = "v0.2.0"
+	// BANNER is what is printed for help/info output
+	BANNER = `           _ _      _
  _   _  __| (_) ___| |_
 | | | |/ _` + "`" + ` | |/ __| __|
 | |_| | (_| | | (__| |_
@@ -20,14 +22,19 @@ const (
  Version: ` + VERSION
 )
 
-func main() {
-	var version bool
+var (
+	version bool
+)
 
+func init() {
 	// parse flags
 	flag.BoolVar(&version, "version", false, "print version and exit")
 	flag.BoolVar(&version, "v", false, "print version and exit (shorthand)")
 	flag.Parse()
+}
 
+func main() {
+	// parse the args
 	args := os.Args
 
 	if len(args) <= 1 || args[1] == "help" {
@@ -42,7 +49,7 @@ func main() {
 
 	word := args[1]
 
-	response, err := api.DefineWord(word)
+	response, err := api.Define(word)
 
 	if err != nil {
 		fmt.Printf("Decoding api response as JSON failed: %v", err)
