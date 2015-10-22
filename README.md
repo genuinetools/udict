@@ -1,5 +1,7 @@
 # udict
 
+[![Circle CI](https://circleci.com/gh/jfrazelle/udict.svg?style=svg)](https://circleci.com/gh/jfrazelle/udict)
+
 A command line urban dictionary
 
 ### Install
@@ -16,27 +18,27 @@ $ udict afaik
 
 # as far as i know
 # --(afaik) <http://afaik.urbanup.com/20253>
-# 
+#
 # It means "As far as I know."
-#  
+#
 # Simple as that.
 # --(AFAIK) <http://afaik.urbanup.com/1073035>
-# 
+#
 # As Far As I Know, to my knowledge
 # --(AFAIK) <http://afaik.urbanup.com/2993363>
-# 
+#
 # Acronym for "As Far As I Know"
 # --(A F A I K) <http://a-f-a-i-k.urbanup.com/1882411>
-# 
+#
 # As Far as I Know
 # --(afaik) <http://afaik.urbanup.com/5696389>
-# 
+#
 # afaik, as far as I know, means as far as I know
 # --(afaik) <http://afaik.urbanup.com/5151214>
-# 
+#
 # As Far As I know
 # --(AFAIK) <http://afaik.urbanup.com/5333224>
-# 
+#
 # As Far As I know
 # --(AFAIK) <http://afaik.urbanup.com/5333211>
 ```
