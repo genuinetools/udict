@@ -12,14 +12,14 @@ const (
 )
 
 // Response describes the data structure that comes back from the
-// Urban Dictionary API
+// Urban Dictionary API.
 type Response struct {
 	Results []Result `json:"list"`
 	Tags    []string `json:"tags"`
 	Type    string   `json:"result_type"`
 }
 
-// Result holds the information for a given definition
+// Result holds the information for a given definition.
 type Result struct {
 	ID         int64  `json:"defid"`
 	Author     string `json:"author"`
@@ -30,7 +30,7 @@ type Result struct {
 	Word       string `json:"word"`
 }
 
-// Define returns the definitions from Urban Dictionary for a given word
+// Define returns the definitions from Urban Dictionary for a given word.
 func Define(word string) (response *Response, err error) {
 	endpoint := fmt.Sprintf("%s/define?page=%d&term=%s", urbanDictionaryAPIURI, 1, url.QueryEscape(word))
 	resp, err := http.Get(endpoint)

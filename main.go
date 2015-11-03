@@ -9,9 +9,9 @@ import (
 )
 
 const (
-	// VERSION is the binary version
+	// VERSION is the binary version.
 	VERSION = "v0.2.0"
-	// BANNER is what is printed for help/info output
+	// BANNER is what is printed for help/info output.
 	BANNER = `           _ _      _
  _   _  __| (_) ___| |_
 | | | |/ _` + "`" + ` | |/ __| __|
