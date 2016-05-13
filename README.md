@@ -1,6 +1,6 @@
 # udict
 
-[![Circle CI](https://circleci.com/gh/jfrazelle/udict.svg?style=svg)](https://circleci.com/gh/jfrazelle/udict)
+[![Travis CI](https://travis-ci.org/jfrazelle/udict.svg?branch=master)](https://travis-ci.org/jfrazelle/udict)
 
 A command line urban dictionary
 
