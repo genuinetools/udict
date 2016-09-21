@@ -50,7 +50,6 @@ func main() {
 	word := args[1]
 
 	response, err := api.Define(word)
-
 	if err != nil {
 		fmt.Printf("Decoding api response as JSON failed: %v", err)
 		return
