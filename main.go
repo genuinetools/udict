@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jfrazelle/udict/api"
+	"github.com/jessfraz/udict/api"
 )
 
 const (

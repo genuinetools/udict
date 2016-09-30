@@ -1,13 +1,13 @@
 # udict
 
-[![Travis CI](https://travis-ci.org/jfrazelle/udict.svg?branch=master)](https://travis-ci.org/jfrazelle/udict)
+[![Travis CI](https://travis-ci.org/jessfraz/udict.svg?branch=master)](https://travis-ci.org/jessfraz/udict)
 
 A command line urban dictionary
 
 ### Install
 
 ```bash
-$ go get github.com/jfrazelle/udict
+$ go get github.com/jessfraz/udict
 ```
 
 ### Example Usage

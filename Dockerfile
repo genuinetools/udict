@@ -7,7 +7,7 @@ ENV GOPATH /go
 RUN	apk add --no-cache \
 	ca-certificates
 
-COPY . /go/src/github.com/jfrazelle/udict
+COPY . /go/src/github.com/jessfraz/udict
 
 RUN set -x \
 	&& apk add --no-cache --virtual .build-deps \
@@ -16,7 +16,7 @@ RUN set -x \
 		gcc \
 		libc-dev \
 		libgcc \
-	&& cd /go/src/github.com/jfrazelle/udict \
+	&& cd /go/src/github.com/jessfraz/udict \
 	&& go build -o /usr/bin/udict . \
 	&& apk del .build-deps \
 	&& rm -rf /go \
