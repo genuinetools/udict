@@ -4,13 +4,23 @@
 
 A command line urban dictionary
 
-### Install
+## Installation
+
+#### Binaries
+
+- **darwin** [386](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-darwin-386) / [amd64](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-darwin-amd64)
+- **freebsd** [386](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-freebsd-386) / [amd64](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-freebsd-amd64)
+- **linux** [386](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-linux-386) / [amd64](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-linux-amd64) / [arm](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-linux-arm) / [arm64](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-linux-arm64)
+- **solaris** [amd64](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-solaris-amd64)
+- **windows** [386](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-windows-386) / [amd64](https://github.com/jessfraz/udict/releases/download/v0.2.0/udict-windows-amd64)
+
+#### Via Go
 
 ```bash
 $ go get github.com/jessfraz/udict
 ```
 
-### Example Usage
+## Usage
 
 ```bash
 $ udict afaik

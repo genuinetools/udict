@@ -6,11 +6,10 @@ import (
 	"os"
 
 	"github.com/jessfraz/udict/api"
+	"github.com/jessfraz/udict/version"
 )
 
 const (
-	// VERSION is the binary version.
-	VERSION = "v0.2.0"
 	// BANNER is what is printed for help/info output.
 	BANNER = `           _ _      _
  _   _  __| (_) ___| |_
@@ -19,35 +18,51 @@ const (
  \__,_|\__,_|_|\___|\__|
 
  Urban Dictionary Command Line Tool
- Version: ` + VERSION
+ Version: %s
+
+`
 )
 
 var (
-	version bool
+	vrsn bool
 )
 
 func init() {
 	// parse flags
-	flag.BoolVar(&version, "version", false, "print version and exit")
-	flag.BoolVar(&version, "v", false, "print version and exit (shorthand)")
+	flag.BoolVar(&vrsn, "version", false, "print version and exit")
+	flag.BoolVar(&vrsn, "v", false, "print version and exit (shorthand)")
+
+	flag.Usage = func() {
+		fmt.Fprint(os.Stderr, fmt.Sprintf(BANNER, version.VERSION))
+		flag.PrintDefaults()
+	}
+
 	flag.Parse()
+
+	if vrsn {
+		fmt.Printf("udict version %s, build %s", version.VERSION, version.GITCOMMIT)
+		os.Exit(0)
+	}
+
+	if flag.NArg() < 1 {
+		usageAndExit("Pass a word or phrase.", 1)
+	}
+
+	// parse the arg
+	arg := flag.Args()[0]
+
+	if arg == "help" {
+		usageAndExit("", 0)
+	}
+
+	if arg == "version" {
+		fmt.Printf("udict version %s, build %s", version.VERSION, version.GITCOMMIT)
+		os.Exit(0)
+	}
 }
 
 func main() {
-	// parse the args
-	args := os.Args
-
-	if len(args) <= 1 || args[1] == "help" {
-		fmt.Println(BANNER)
-		return
-	}
-
-	if version || args[1] == "version" {
-		fmt.Println(VERSION)
-		return
-	}
-
-	word := args[1]
+	word := flag.Args()[0]
 
 	response, err := api.Define(word)
 	if err != nil {
@@ -62,4 +77,14 @@ func main() {
 	}
 
 	fmt.Println(defResponse)
+}
+
+func usageAndExit(message string, exitCode int) {
+	if message != "" {
+		fmt.Fprintf(os.Stderr, message)
+		fmt.Fprintf(os.Stderr, "\n\n")
+	}
+	flag.Usage()
+	fmt.Fprintf(os.Stderr, "\n")
+	os.Exit(exitCode)
 }
