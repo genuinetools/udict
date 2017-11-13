@@ -7,6 +7,7 @@
     - 1.6.x
     - 1.7.x
     - 1.8.x
+    - 1.9.x
     - tip
   env:
     global:
@@ -24,7 +25,6 @@
     provider: releases
     api_key:
       secure: "H3xi0lg9HQchwdb0EhxomvOvv+XyrTl83Z4JHUNr62dbhFbqaRt7Fl07evSVKELdGYwpyThiuHfDQjmVxJMvDbtiprT0OGnPFvusWKMtE6NP3PH0rXucja19hN0DbqK+Z5LPG+5K7VByz4p9jfB03F0sp0WFMxUq30GDY2OwQCvxjrZkKpfqiR9r7y50P3uNoIx+B5lC/hMxlSgjtihQoUoSK3CGQlUTtWGdoIPsEydZm8RS6ZCg1nKjnRA7/iAJpeA10uqephzLJcFFajvcaTW6L2UttgBrHd4gKHixdV6cZv9hiEQek/9gu7IjIb8ssQ6Nwwe/nz7ZWoSfEpbGyhg3KCdjDddkSRw1sVzjJQz+32Y7WAoJT+APKMYcJkDTYM8apigLnnRbI+LwM89r6JpT6ncffZM1Y5v/wzhSF4YLLlG69fdw25vTNifwN5mvgD7waGDo8gVYPstvSMvaDOiyKozya4j6YiqbteKE/XbkXKiyEnIFSzz2UThcZc4Y4K0ikAAyO0SVrTmT40TI1kJ273OOKrHqa/jpbBPfcNZbShywzU5auu72fX3B09Qm8nRbop+D8PTreNm2aef4VrOijM7PQAFtv/3Xxfrpvu5xdT5extSEIDiACbt+1kAxzd09d9m1wwyfz0ugOjNHMoYro6YLfv7GRw0eFDBN+6Q="
-    go: 1.8.x
     file:
       - cross/udict-linux-amd64.md5
       - cross/udict-windows-386.sha256
@@ -61,4 +61,5 @@
       - cross/udict-linux-amd64
     skip_cleanup: true
     on:
+      go: 1.9.x
       tags: true
