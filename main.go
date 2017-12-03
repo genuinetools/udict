@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/jessfraz/udict/api"
 	"github.com/jessfraz/udict/version"
@@ -49,7 +50,7 @@ func init() {
 	}
 
 	// parse the arg
-	arg := flag.Args()[0]
+	arg := strings.Join(flag.Args(), " ")
 
 	if arg == "help" {
 		usageAndExit("", 0)
@@ -62,7 +63,7 @@ func init() {
 }
 
 func main() {
-	word := flag.Args()[0]
+	word := strings.Join(flag.Args(), " ")
 
 	response, err := api.Define(word)
 	if err != nil {
