@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	urbanDictionaryAPIURI = "http://api.urbandictionary.com/v0"
+	urbanDictionaryAPIURI = "https://api.urbandictionary.com/v0"
 )
 
 // Response describes the data structure that comes back from the
