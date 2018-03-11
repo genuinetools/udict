@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jessfraz/udict/api"
-	"github.com/jessfraz/udict/version"
+	"github.com/genuinetools/udict/api"
+	"github.com/genuinetools/udict/version"
 )
 
 const (
