@@ -1,62 +1,58 @@
----
-  language: go
-  sudo: false
-  notifications:
-    email: true
-  go:
-    - 1.x
-    - tip
-  matrix:
-    allow_failures:
-      - go: tip
-    fast_finish: true
-  install:
-    - go get github.com/golang/lint/golint
-    - go get honnef.co/go/tools/cmd/staticcheck
-  script:
-    - make all
-    - make cover
-    - make release
-  after_success:
-    - bash <(curl -s https://codecov.io/bash)
-  deploy:
-    provider: releases
-    api_key:
-      secure: "H3xi0lg9HQchwdb0EhxomvOvv+XyrTl83Z4JHUNr62dbhFbqaRt7Fl07evSVKELdGYwpyThiuHfDQjmVxJMvDbtiprT0OGnPFvusWKMtE6NP3PH0rXucja19hN0DbqK+Z5LPG+5K7VByz4p9jfB03F0sp0WFMxUq30GDY2OwQCvxjrZkKpfqiR9r7y50P3uNoIx+B5lC/hMxlSgjtihQoUoSK3CGQlUTtWGdoIPsEydZm8RS6ZCg1nKjnRA7/iAJpeA10uqephzLJcFFajvcaTW6L2UttgBrHd4gKHixdV6cZv9hiEQek/9gu7IjIb8ssQ6Nwwe/nz7ZWoSfEpbGyhg3KCdjDddkSRw1sVzjJQz+32Y7WAoJT+APKMYcJkDTYM8apigLnnRbI+LwM89r6JpT6ncffZM1Y5v/wzhSF4YLLlG69fdw25vTNifwN5mvgD7waGDo8gVYPstvSMvaDOiyKozya4j6YiqbteKE/XbkXKiyEnIFSzz2UThcZc4Y4K0ikAAyO0SVrTmT40TI1kJ273OOKrHqa/jpbBPfcNZbShywzU5auu72fX3B09Qm8nRbop+D8PTreNm2aef4VrOijM7PQAFtv/3Xxfrpvu5xdT5extSEIDiACbt+1kAxzd09d9m1wwyfz0ugOjNHMoYro6YLfv7GRw0eFDBN+6Q="
-    file:
-      - cross/udict-linux-amd64.md5
-      - cross/udict-windows-386.sha256
-      - cross/udict-linux-arm
-      - cross/udict-darwin-amd64.md5
-      - cross/udict-darwin-amd64
-      - cross/udict-solaris-amd64.md5
-      - cross/udict-linux-arm64.sha256
-      - cross/udict-linux-arm.sha256
-      - cross/udict-linux-386.sha256
-      - cross/udict-darwin-386.md5
-      - cross/udict-windows-386.md5
-      - cross/udict-freebsd-amd64.md5
-      - cross/udict-linux-arm64.md5
-      - cross/udict-linux-arm64
-      - cross/udict-freebsd-amd64.sha256
-      - cross/udict-freebsd-386.md5
-      - cross/udict-linux-amd64.sha256
-      - cross/udict-linux-386.md5
-      - cross/udict-freebsd-386
-      - cross/udict-solaris-amd64.sha256
-      - cross/udict-windows-amd64
-      - cross/udict-windows-amd64.md5
-      - cross/udict-windows-amd64.sha256
-      - cross/udict-linux-arm.md5
-      - cross/udict-darwin-386.sha256
-      - cross/udict-darwin-amd64.sha256
-      - cross/udict-windows-386
-      - cross/udict-solaris-amd64
-      - cross/udict-darwin-386
-      - cross/udict-linux-386
-      - cross/udict-freebsd-amd64
-      - cross/udict-freebsd-386.sha256
-      - cross/udict-linux-amd64
-    skip_cleanup: true
-    on:
-      tags: true
+language: go
+sudo: false
+go:
+  - 1.10.x
+before_install:
+  - go get github.com/golang/lint/golint
+  - go get honnef.co/go/tools/cmd/staticcheck
+jobs:
+  include:
+    - script: make all
+    - stage: Run Test Coverage
+      script: make cover
+      after_success: bash <(curl -s https://codecov.io/bash)
+    - stage: Build Release
+      script:
+        - make release
+        - echo "Deploying to GitHub releases ..."
+      deploy:
+        provider: releases
+        file:
+          - cross/udict-linux-amd64.md5
+          - cross/udict-windows-386.sha256
+          - cross/udict-linux-arm
+          - cross/udict-darwin-amd64.md5
+          - cross/udict-darwin-amd64
+          - cross/udict-solaris-amd64.md5
+          - cross/udict-linux-arm64.sha256
+          - cross/udict-linux-arm.sha256
+          - cross/udict-linux-386.sha256
+          - cross/udict-darwin-386.md5
+          - cross/udict-windows-386.md5
+          - cross/udict-freebsd-amd64.md5
+          - cross/udict-linux-arm64.md5
+          - cross/udict-linux-arm64
+          - cross/udict-freebsd-amd64.sha256
+          - cross/udict-freebsd-386.md5
+          - cross/udict-linux-amd64.sha256
+          - cross/udict-linux-386.md5
+          - cross/udict-freebsd-386
+          - cross/udict-solaris-amd64.sha256
+          - cross/udict-windows-amd64
+          - cross/udict-windows-amd64.md5
+          - cross/udict-windows-amd64.sha256
+          - cross/udict-linux-arm.md5
+          - cross/udict-darwin-386.sha256
+          - cross/udict-darwin-amd64.sha256
+          - cross/udict-windows-386
+          - cross/udict-solaris-amd64
+          - cross/udict-darwin-386
+          - cross/udict-linux-386
+          - cross/udict-freebsd-amd64
+          - cross/udict-freebsd-386.sha256
+          - cross/udict-linux-amd64
+        skip_cleanup: true
+        on:
+          tags: true
+        api_key:
+          secure: "H3xi0lg9HQchwdb0EhxomvOvv+XyrTl83Z4JHUNr62dbhFbqaRt7Fl07evSVKELdGYwpyThiuHfDQjmVxJMvDbtiprT0OGnPFvusWKMtE6NP3PH0rXucja19hN0DbqK+Z5LPG+5K7VByz4p9jfB03F0sp0WFMxUq30GDY2OwQCvxjrZkKpfqiR9r7y50P3uNoIx+B5lC/hMxlSgjtihQoUoSK3CGQlUTtWGdoIPsEydZm8RS6ZCg1nKjnRA7/iAJpeA10uqephzLJcFFajvcaTW6L2UttgBrHd4gKHixdV6cZv9hiEQek/9gu7IjIb8ssQ6Nwwe/nz7ZWoSfEpbGyhg3KCdjDddkSRw1sVzjJQz+32Y7WAoJT+APKMYcJkDTYM8apigLnnRbI+LwM89r6JpT6ncffZM1Y5v/wzhSF4YLLlG69fdw25vTNifwN5mvgD7waGDo8gVYPstvSMvaDOiyKozya4j6YiqbteKE/XbkXKiyEnIFSzz2UThcZc4Y4K0ikAAyO0SVrTmT40TI1kJ273OOKrHqa/jpbBPfcNZbShywzU5auu72fX3B09Qm8nRbop+D8PTreNm2aef4VrOijM7PQAFtv/3Xxfrpvu5xdT5extSEIDiACbt+1kAxzd09d9m1wwyfz0ugOjNHMoYro6YLfv7GRw0eFDBN+6Q="
