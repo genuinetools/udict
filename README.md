@@ -1,22 +1,25 @@
 # udict
 
-[![Travis CI](https://travis-ci.org/genuinetools/udict.svg?branch=master)](https://travis-ci.org/genuinetools/udict)
+[![Travis CI](https://img.shields.io/travis/genuinetools/udict.svg?style=for-the-badge)](https://travis-ci.org/genuinetools/udict)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=for-the-badge)](https://godoc.org/github.com/genuinetools/udict)
+[![Github All Releases](https://img.shields.io/github/downloads/genuinetools/udict/total.svg?style=for-the-badge)](https://github.com/genuinetools/udict/releases)
 
-A command line urban dictionary
+A command line urban dictionary.
+
+ * [Installation](README.md#installation)
+      * [Binaries](README.md#binaries)
+      * [Via Go](README.md#via-go)
+ * [Usage](README.md#usage)
 
 ## Installation
 
 #### Binaries
 
-- **darwin** [386](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-darwin-386) / [amd64](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-darwin-amd64)
-- **freebsd** [386](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-freebsd-386) / [amd64](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-freebsd-amd64)
-- **linux** [386](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-linux-386) / [amd64](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-linux-amd64) / [arm](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-linux-arm) / [arm64](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-linux-arm64)
-- **solaris** [amd64](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-solaris-amd64)
-- **windows** [386](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-windows-386) / [amd64](https://github.com/genuinetools/udict/releases/download/v0.5.1/udict-windows-amd64)
+For installation instructions from binaries please visit the [Releases Page](https://github.com/genuinetools/udict/releases).
 
 #### Via Go
 
-```bash
+```console
 $ go get github.com/genuinetools/udict
 ```
 

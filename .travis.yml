@@ -18,39 +18,39 @@ jobs:
       deploy:
         provider: releases
         file:
-          - cross/udict-linux-amd64.md5
-          - cross/udict-windows-386.sha256
-          - cross/udict-linux-arm
-          - cross/udict-darwin-amd64.md5
           - cross/udict-darwin-amd64
-          - cross/udict-solaris-amd64.md5
-          - cross/udict-linux-arm64.sha256
-          - cross/udict-linux-arm.sha256
-          - cross/udict-linux-386.sha256
+          - cross/udict-darwin-amd64.md5
+          - cross/udict-darwin-amd64.sha256
+          - cross/udict-darwin-386
           - cross/udict-darwin-386.md5
-          - cross/udict-windows-386.md5
+          - cross/udict-darwin-386.sha256
+          - cross/udict-freebsd-amd64
           - cross/udict-freebsd-amd64.md5
-          - cross/udict-linux-arm64.md5
-          - cross/udict-linux-arm64
           - cross/udict-freebsd-amd64.sha256
-          - cross/udict-freebsd-386.md5
-          - cross/udict-linux-amd64.sha256
-          - cross/udict-linux-386.md5
           - cross/udict-freebsd-386
+          - cross/udict-freebsd-386.md5
+          - cross/udict-freebsd-386.sha256
+          - cross/udict-linux-arm
+          - cross/udict-linux-arm.md5
+          - cross/udict-linux-arm.sha256
+          - cross/udict-linux-arm64
+          - cross/udict-linux-arm64.md5
+          - cross/udict-linux-arm64.sha256
+          - cross/udict-linux-amd64
+          - cross/udict-linux-amd64.md5
+          - cross/udict-linux-amd64.sha256
+          - cross/udict-linux-386
+          - cross/udict-linux-386.md5
+          - cross/udict-linux-386.sha256
+          - cross/udict-solaris-amd64
+          - cross/udict-solaris-amd64.md5
           - cross/udict-solaris-amd64.sha256
           - cross/udict-windows-amd64
           - cross/udict-windows-amd64.md5
           - cross/udict-windows-amd64.sha256
-          - cross/udict-linux-arm.md5
-          - cross/udict-darwin-386.sha256
-          - cross/udict-darwin-amd64.sha256
           - cross/udict-windows-386
-          - cross/udict-solaris-amd64
-          - cross/udict-darwin-386
-          - cross/udict-linux-386
-          - cross/udict-freebsd-amd64
-          - cross/udict-freebsd-386.sha256
-          - cross/udict-linux-amd64
+          - cross/udict-windows-386.md5
+          - cross/udict-windows-386.sha256
         skip_cleanup: true
         on:
           tags: true
