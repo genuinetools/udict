@@ -1,91 +1,84 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 
+	"github.com/genuinetools/pkg/cli"
 	"github.com/genuinetools/udict/api"
 	"github.com/genuinetools/udict/version"
-)
-
-const (
-	// BANNER is what is printed for help/info output.
-	BANNER = `           _ _      _
- _   _  __| (_) ___| |_
-| | | |/ _` + "`" + ` | |/ __| __|
-| |_| | (_| | | (__| |_
- \__,_|\__,_|_|\___|\__|
-
- Urban Dictionary Command Line Tool
- Version: %s
-
-`
+	"github.com/sirupsen/logrus"
 )
 
 var (
-	vrsn bool
+	debug bool
 )
 
-func init() {
-	// parse flags
-	flag.BoolVar(&vrsn, "version", false, "print version and exit")
-	flag.BoolVar(&vrsn, "v", false, "print version and exit (shorthand)")
-
-	flag.Usage = func() {
-		fmt.Fprint(os.Stderr, fmt.Sprintf(BANNER, version.VERSION))
-		flag.PrintDefaults()
-	}
-
-	flag.Parse()
-
-	if vrsn {
-		fmt.Printf("udict version %s, build %s", version.VERSION, version.GITCOMMIT)
-		os.Exit(0)
-	}
-
-	if flag.NArg() < 1 {
-		usageAndExit("Pass a word or phrase.", 1)
-	}
-
-	// parse the arg
-	arg := strings.Join(flag.Args(), " ")
-
-	if arg == "help" {
-		usageAndExit("", 0)
-	}
-
-	if arg == "version" {
-		fmt.Printf("udict version %s, build %s", version.VERSION, version.GITCOMMIT)
-		os.Exit(0)
-	}
-}
-
 func main() {
-	word := strings.Join(flag.Args(), " ")
+	// Create a new cli program.
+	p := cli.NewProgram()
+	p.Name = "udict"
+	p.Description = "A command line urban dictionary"
 
-	response, err := api.Define(word)
-	if err != nil {
-		fmt.Printf("Decoding api response as JSON failed: %v", err)
-		return
+	// Set the GitCommit and Version.
+	p.GitCommit = version.GITCOMMIT
+	p.Version = version.VERSION
+
+	// Setup the global flags.
+	p.FlagSet = flag.NewFlagSet("global", flag.ExitOnError)
+	p.FlagSet.BoolVar(&debug, "d", false, "enable debug logging")
+
+	// Set the before function.
+	p.Before = func(ctx context.Context) error {
+		// Set the log level.
+		if debug {
+			logrus.SetLevel(logrus.DebugLevel)
+		}
+
+		if p.FlagSet.NArg() < 1 {
+			return errors.New("Pass a word or phrase")
+		}
+
+		return nil
 	}
 
-	defResponse := fmt.Sprintf("%d definitions returned\n", len(response.Results))
+	// Set the main program action.
+	p.Action = func(ctx context.Context, args []string) error {
+		// On ^C, or SIGTERM handle exit.
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, os.Interrupt)
+		signal.Notify(c, syscall.SIGTERM)
+		go func() {
+			for sig := range c {
+				logrus.Infof("Received %s, exiting.", sig.String())
+				os.Exit(0)
+			}
+		}()
 
-	for _, def := range response.Results {
-		defResponse += fmt.Sprintf("\n%s\n--(%s) <%s>\n", def.Definition, def.Word, def.Link)
+		word := strings.Join(args, " ")
+
+		response, err := api.Define(word)
+		if err != nil {
+			return fmt.Errorf("Decoding API response failed: %v", err)
+		}
+
+		defResponse := fmt.Sprintf("%d definitions returned\n", len(response.Results))
+
+		for _, def := range response.Results {
+			defResponse += fmt.Sprintf("\n%s\n--(%s) <%s>\n", def.Definition, def.Word, def.Link)
+		}
+
+		fmt.Println(defResponse)
+
+		return nil
 	}
 
-	fmt.Println(defResponse)
-}
-
-func usageAndExit(message string, exitCode int) {
-	if message != "" {
-		fmt.Fprintf(os.Stderr, message)
-		fmt.Fprintf(os.Stderr, "\n\n")
-	}
-	flag.Usage()
-	fmt.Fprintf(os.Stderr, "\n")
-	os.Exit(exitCode)
+	// Run our program.
+	p.Run()
 }
