@@ -10,6 +10,11 @@ A command line urban dictionary.
 
 <!-- toc -->
 
+- [Installation](#installation)
+    + [Binaries](#binaries)
+    + [Via Go](#via-go)
+- [Usage](#usage)
+
 <!-- tocstop -->
 
 ## Installation
@@ -56,4 +61,3 @@ $ udict afaik
 # As Far As I know
 # --(AFAIK) <http://afaik.urbanup.com/5333211>
 ```
-
