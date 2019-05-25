@@ -42,7 +42,7 @@ func main() {
 		}
 
 		if p.FlagSet.NArg() < 1 {
-			return errors.New("Pass a word or phrase")
+			return errors.New("pass a word or phrase")
 		}
 
 		return nil
@@ -65,7 +65,7 @@ func main() {
 
 		response, err := api.Define(word)
 		if err != nil {
-			return fmt.Errorf("Decoding API response failed: %v", err)
+			return fmt.Errorf("decoding API response failed: %v", err)
 		}
 
 		defResponse := fmt.Sprintf("%d definitions returned\n", len(response.Results))
