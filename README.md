@@ -1,6 +1,7 @@
 # udict
 
-[![Travis CI](https://img.shields.io/travis/genuinetools/udict.svg?style=for-the-badge)](https://travis-ci.org/genuinetools/udict)
+![make-all](https://github.com/genuinetools/udict/workflows/make%20all/badge.svg)
+![make-image](https://github.com/genuinetools/udict/workflows/make%20image/badge.svg)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=for-the-badge)](https://godoc.org/github.com/genuinetools/udict)
 [![Github All Releases](https://img.shields.io/github/downloads/genuinetools/udict/total.svg?style=for-the-badge)](https://github.com/genuinetools/udict/releases)
 
@@ -8,14 +9,8 @@ A command line urban dictionary.
 
 **Table of Contents**
 
-<!-- toc -->
-
-- [Installation](#installation)
-    + [Binaries](#binaries)
-    + [Via Go](#via-go)
-- [Usage](#usage)
-
-<!-- tocstop -->
+<!-- START doctoc -->
+<!-- END doctoc -->
 
 ## Installation
 
